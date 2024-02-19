@@ -8,6 +8,7 @@ import lombok.experimental.FieldDefaults;
 public class SharedResource {
      int itemCount = 0;
 
+
     public synchronized void produce() {
         // تولید یک مورد جدید
         System.out.println("Producing item...");
