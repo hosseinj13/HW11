@@ -49,6 +49,8 @@ class SharedResource {
         return count >= maxNumber;
     }
 
-
+    public List<Integer> getSharedList() {
+        return sharedList;
+    }
 
 }
