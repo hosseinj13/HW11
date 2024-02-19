@@ -2,6 +2,7 @@ package org.example.one;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +12,10 @@ import java.util.List;
 @Setter
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
-
 class SharedResource {
-     List<Integer> sharedList = new ArrayList<>();
-     int count;
-     boolean isOddThreadTurn = false;
+    List<Integer> sharedList = new ArrayList<>();
+    int count;
+    boolean isOddThreadTurn = false;
 
     public synchronized void addNumber(int number) {
         while (isOddThreadTurn) {
@@ -45,6 +44,11 @@ class SharedResource {
         isOddThreadTurn = false;
         notify();
     }
+
+    public synchronized boolean isFinished(int maxNumber) {
+        return count >= maxNumber;
+    }
+
 
 
 }
