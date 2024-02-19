@@ -2,7 +2,6 @@ package org.example.one;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +29,20 @@ class SharedResource {
         sharedList.add(number);
         count++;
         isOddThreadTurn = true;
+        notify();
+    }
+
+    public synchronized void addOddNumber(int number) {
+        while (!isOddThreadTurn) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        sharedList.add(number);
+        count++;
+        isOddThreadTurn = false;
         notify();
     }
 
